@@ -38,11 +38,11 @@ services:
     restart: always
     environment:
       - HTTP_PORT=8080
-      - SOCKS_PORT=1080
+      - SOCKS_PORT=7835
     volumes:
        - ./passwd:/etc/3proxy/passwd:ro
     ports:
-      - "1080:1080"
+      - "7835:7835"
       - "8080:8080"
 ```
 
@@ -50,7 +50,7 @@ services:
 
 * USER, PASS - preset USER with PASSword
 * HTTP_PORT - set port for http proxy. Default: 8080
-* SOCKS_PORT - set port for socks5 proxy. Default: 1080
+* SOCKS_PORT - set port for socks5 proxy. Default: 7835
 
 ### Disable ping responses from CentOS/RHEL system?
 
