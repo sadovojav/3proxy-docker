@@ -6,14 +6,14 @@ Lightweight docker image with tiny 3proxy server. This configuration doesn't hav
 When USER and PASS are not specified, it will create a user with a random password. You will see the credentials in the logs.
 ```console
 docker pull timkolotov/3proxy-docker
-docker run -d --restart always -p 1080:1080 -p 8080:8080 --name 3proxy timkolotov/3proxy-docker
+docker run -d --restart always -p 7835:7835 -p 8080:8080 --name 3proxy timkolotov/3proxy-docker
 docker logs 3proxy
 ```
 
 ### Simple usage
 Run a container with a specified user and password
 ```console
-docker run -d --restart always -p 1080:1080 -p 8080:8080 -e USER=userName -e PASS=secretPass --name 3proxy timkolotov/3proxy-docker
+docker run -d --restart always -p 7835:7835 -p 8080:8080 -e USER=userName -e PASS=secretPass --name 3proxy timkolotov/3proxy-docker
 ```
 
 ### Multiple users
@@ -24,7 +24,7 @@ userName2:CL:secretPass2
 ```
 
 ```console
-docker run -d --restart always -p 1080:1080 -p 8080:8080 -v /path_to/passwd:/etc/3proxy/passwd --name 3proxy timkolotov/3proxy-docker
+docker run -d --restart always -p 7835:7835 -p 8080:8080 -v /path_to/passwd:/etc/3proxy/passwd --name 3proxy timkolotov/3proxy-docker
 ```
 
 ### Example docker-compose.yml
