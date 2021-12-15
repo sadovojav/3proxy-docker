@@ -52,3 +52,32 @@ services:
 * HTTP_PORT - set port for http proxy. Default: 8080
 * SOCKS_PORT - set port for socks5 proxy. Default: 1080
 
+### Disable ping responses from CentOS/RHEL system?
+
+1. On the server where you need to disable ping responses, review the current setting related to responses to ping messages with the following command:
+```
+cat /proc/sys/net/ipv4/icmp_echo_ignore_all
+0
+```
+2. Assuming the output is a 0, try the ping localhost command. You should get a response to the ping requests. Don’t forget to press CTRL-C to exit from the output stream. If the output is 1, skip to Step 3.
+```
+ping localhost
+PING localhost (127.0.0.1) 56(84) bytes of data. 
+64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.060 ms
+```
+3. If the output to above command is not 1 then, change the kernel setting described in Step 1 with the following command:
+```
+echo "1" > /proc/sys/net/ipv4/icmp_echo_ignore_all
+```
+
+#### Making the changes persistent
+```
+vi /etc/sysctl.conf 
+# Ignore all to ICMP (ping) 
+net.ipv4.icmp_echo_ignore_all = 1
+```
+To verify the parameter set use the below command:
+```
+sysctl -a | grep "icmp_echo_ignore_all"
+net.ipv4.icmp_echo_ignore_all = 1
+```
